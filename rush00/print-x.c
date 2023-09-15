@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
 void ft_putchar(char c)
 {
     write(1, &c, 1) ;
@@ -38,7 +37,7 @@ void printx(int x)
 void ft_rush(int a, int b)
 {
     if (a <= 0 | b <= 0) {
-        write(1,"Invalid input. Please use only positive value integer.\n",55);
+        write(2,"Invalid input. Please use only positive value integer.\n",55);
         return;
     }
     if (b == 1){
@@ -74,7 +73,7 @@ int main(int argc, char *argv[])
 
 
     if (argc <= 2){
-        write(1,"Please provide argument X Y\n",28);
+        write(2,"Please provide argument X Y\n",28);
         return(0);
     } else {
         ft_rush(numx,numy);
