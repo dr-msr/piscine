@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Werror "$1" -o test && chmod 777 test && ./test && rm test
