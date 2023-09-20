@@ -28,14 +28,13 @@ void ft_strlowcase(char *str)
 	}
 }
 
-
-
 char *ft_strcapitalize(char *str)
 {
 	int	i;
 	int mark;
 
 	i = 0;
+	mark = 1;
 	ft_strlowcase(str);
 
 	while (str[i] != '\0')
