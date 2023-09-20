@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 09:17:21 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/18 09:22:03 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/18 09:16:49 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/18 09:22:27 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-char	ft_strncpy(char *dest, char *src, unsigned int n)
+char	*ft_strcpy(char *dest, char *src)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	while (src[i] != '\0')
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
+	dest[i] = '\0';
 	return (dest);
 }

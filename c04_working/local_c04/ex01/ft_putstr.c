@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 09:17:21 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/18 09:22:03 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/20 12:38:23 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/20 12:44:47 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-char	ft_strncpy(char *dest, char *src, unsigned int n)
+
+#include <unistd.h>
+
+void	ft_putchar(char *str)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	while (str[i] != '\0')
 	{
-		dest[i] = src[i];
+		write (1, &str[i], 1);
 		i++;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
 }
+/*
+int	main(void)
+{
+	char *a = "This is Sparta.\n";
+	ft_putchar(a);
+	return (0);
+}*/

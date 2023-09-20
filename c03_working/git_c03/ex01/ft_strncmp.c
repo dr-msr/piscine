@@ -6,20 +6,18 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:36:32 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/20 10:46:22 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/20 15:31:47 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	int	i;
+	unsigned int	i;
 	int	diff;
-	int	compare;
-
-	compare = n;
+	
 	i = 0;
 	diff = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < compare)
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
 	{
 		diff = s1[i] - s2[i];
 		if (diff != 0)

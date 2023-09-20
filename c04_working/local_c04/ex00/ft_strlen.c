@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 09:17:21 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/18 09:22:03 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/20 12:32:57 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/20 12:37:59 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-char	ft_strncpy(char *dest, char *src, unsigned int n)
+
+int	ft_strlen(char *str)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < n)
-	{
-		dest[i] = src[i];
+	while (str[i] != '\0')
 		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	return (i);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char *a = "This is 42KL.";
+	int i = ft_strlen(a);
+	printf("%s\n",a);
+	printf("%d\n",i);
+	return (0);
+}*/

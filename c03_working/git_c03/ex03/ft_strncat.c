@@ -6,24 +6,22 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:34:30 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/20 10:51:50 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/20 15:32:44 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
 	int	target;
-	int	run;
-	int	limit;
+	unsigned int	run;
 
-	limit = nb;
 	target = 0;
 	while (dest[target] != '\0')
 	{
 		target++;
 	}
 	run = 0;
-	while (src[run] != '\0' && run < limit)
+	while (src[run] != '\0' && run < nb)
 	{
 		dest[target] = src[run];
 		target++;

@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 09:17:21 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/18 09:22:03 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/18 09:17:57 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/18 09:25:30 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-char	ft_strncpy(char *dest, char *src, unsigned int n)
+int	ft_str_is_lowercase(char *str)
 {
-	unsigned int	i;
+	int	i;
+	int	count;
 
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	count = 0;
+	while (str[i] != '\0')
 	{
-		dest[i] = src[i];
-		i++;
+		if (str[i] >= 97 && str[i] <= 122)
+		{
+			i++;
+		}
+		else
+		{
+			count++;
+			i++;
+		}
 	}
-	while (i < n)
+	if (count == 0 || str[0] == '\0')
 	{
-		dest[i] = '\0';
-		i++;
+		return (1);
 	}
-	return (dest);
+	else
+	{
+		return (0);
+	}
 }
