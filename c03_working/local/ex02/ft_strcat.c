@@ -6,7 +6,7 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:34:30 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/18 10:37:21 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/19 14:43:58 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,20 @@ char	*ft_strcat(char *dest, char *src)
 	}
 	dest[target] = '\0';
 	return (dest);
-}	
+}
+/*
+#include <stdio.h>
+#include <string.h>
+
+// Concatenante b into a. 
+ 
+int	main()
+	{
+		char a[100] = "This is ayam. ";
+		char b[100] = "Ayam is goreng. ";
+		char c[100] = "Makan dengan nasi.";
+
+		printf("%s\n",ft_strcat(a,b));
+		printf("%s\n",strcat(a,c));
+		return (0);
+	}*/

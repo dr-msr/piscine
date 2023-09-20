@@ -1,49 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 09:36:32 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/19 14:22:54 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/18 09:17:57 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/18 09:25:30 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-//#include <string.h>
-
-int	ft_strcmp(char *s1, char *s2)
+int	ft_str_is_lowercase(char *str)
 {
 	int	i;
-	int	diff;
+	int	count;
 
 	i = 0;
-	diff = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
+	count = 0;
+	while (str[i] != '\0')
 	{
-		diff = s1[i] - s2[i];
-		if (diff == 0)
+		if (str[i] >= 97 && str[i] <= 122)
 		{
 			i++;
 		}
 		else
 		{
-			return (diff);
+			count++;
+			i++;
 		}
 	}
-	return (0);
+	if (count == 0 || str[0] == '\0')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
-
-/* int	main()
-{
-
-//	Compare a with b, lexicographically. If a > b, returns the positive value.
-
-	char *a = "Test";
-	char *b = "";
-	
-	printf("%d\n",strcmp(a,b));
-	printf("%d",ft_strcmp(a,b));
-	return (0);
-}*/

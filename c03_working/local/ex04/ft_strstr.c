@@ -1,36 +1,50 @@
-char *ft_strstr(char *str, char *to_find)
+char	*ft_strstr(char *str, char *to_find)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
+	int mark;
 
 	i = 0;
-	j = 0;
+	mark = 0;
 
-	if (to_find[0] == '\0') // first, check if to_find is empty, will return str
-		return (str);
-
-	while (str[i] != '\0') // loop through str until end
+	if (to_find[0] == '\0')
 	{
-		j = 0; // resets back j counter to 0
-		while (str[i +j] != '\0' && str [i + j] == to_find[j]) // loop through each char in str and to_find
-		{
-			if (to_find[j + 1] == '\0') // if to_find complete, return the str address at i mark
-				return (&str[i]);
-			j++; // if not complete, move to next j
-		}
-		i++; 
+		return (str);
 	}
-	return (0); // if able to run through the codes (no match found), return null
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == to_find[i])
+		{
+			mark = i;
+			j = 0;
+			while (to_find[j] != '\0')
+			{
+				i++;
+				j++;
+			}
+			return (str + mark);
+		} else
+		{
+			i++;
+		}
+	i}
+	return (0);	
 }
 
-#include <string.h>
-#include <stdio.h>
+ #include <string.h>
+ #include <stdio.h>
+ int main(void)
+ {
+     char *test1 = "Hello Beautiful World";
+     char *test2 = "Beau";
+     char *i = strstr(test1, test2);
+     char *j = ft_strstr(test1, test2);
+     printf("%s\n", i);
+      printf("%s\n", j);
+      return (0);
+  }
 
-int	main()
-{
-	char *a = "This is ayam goreng";
-	char *b = "ayam";
 
-	printf("%s\n",ft_strstr(a,b));
-	return (0);
-}
+
+
