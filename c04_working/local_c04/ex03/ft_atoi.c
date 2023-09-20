@@ -9,6 +9,7 @@
 /*   Updated: 2023/09/20 14:40:35 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 
 void ft_putstr(char *str)
 {
@@ -17,42 +18,58 @@ void ft_putstr(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(1,str[i],1);
+		write(1,&str[i],1);
 		i++;
 	}
 }
 
-void	trim_sign(char *str)
+int	trim_sign(char *str, int *mark)
 {
 	int i;
 	int count;
-	char trimmed[];
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (!(str[i] >= '0' && str[i] <= '9'))
 	{
-		if (str[i] != " " || str[i] != "-" || str[i] != "+" || (str[i] < '9' && str[i] >= '0'))
+		if (str[i] == '-')
 		{
-		trimmed[i] = str[i];
+			count++;
+		}
 		i++;
-		}	
-
 	}
-	ft_putstr(*trimmed);
+	*mark = i;
+	if (count % 2 == 1)
+		return (-1);
+	return (1);
 }
-
 
 int	ft_atoi(char *str)
 {
-	trim_sign(str);
-}
+	int	sign;
+	int	output;
+	int	i;
 
+	sign = trim_sign(str, &i);
+	output = 0;
+	while (str[i]  && str[i] >= 48 && str[i] <= 57)
+	{
+		output = output * 10;
+		output = output + (str[i] - 48);
+		i++;
+	}
+	output = output * sign;
+	return (output);
+}
+/*
+#include <stdio.h>
 
 int main(void)
 {
-	char *a = " ---+--+1234ab567";
-//	ft_atoi(a);
+	char *a = "  ---+--+1234ab567";
+	printf("%d",ft_atoi(a));
+	printf("\n");
 	ft_putstr(a);
+	ft_putstr("\n");
 	return (0);
-}
+}*/
