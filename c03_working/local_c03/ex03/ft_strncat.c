@@ -6,30 +6,27 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:34:30 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/19 14:49:26 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/20 15:32:44 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	int	target;
-	int	run;
-	int	limit;
+	unsigned int	target;
+	unsigned int	run;
 
-	limit = nb;
 	target = 0;
+	run = 0;
 	while (dest[target] != '\0')
 	{
 		target++;
 	}
-	run = 0;
-	while (src[run] != '\0' && run < limit)
+	while (src[run] != '\0' && run < nb)
 	{
-		dest[target] = src[run];
-		target++;
+		dest[target + run] = src[run];
 		run++;
 	}
-	dest[target] = '\0';
+	dest[target + run] = '\0';
 	return (dest);
 }
 /*
@@ -40,8 +37,10 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 int	main()
 {
 	char a[100] = "This is ayam. ";
+	char a1[100] = "This is ayam. ";
 	char b[100] = "Ayam is goreng.";
 
 	printf("%s\n",ft_strncat(a,b,12));
+	printf("%s\n",strncat(a1,b,12));
 			return (0);
 }*/

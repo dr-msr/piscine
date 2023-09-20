@@ -6,12 +6,9 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:36:32 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/19 14:22:54 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/20 10:43:53 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-//#include <string.h>
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -34,16 +31,19 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+/*
+#include <stdio.h>
+#include <string.h>
 
-/* int	main()
+ int	main()
 {
 
 //	Compare a with b, lexicographically. If a > b, returns the positive value.
 
 	char *a = "Test";
-	char *b = "";
+	char *b = "Test"; // can change this into empty, or other string
 	
 	printf("%d\n",strcmp(a,b));
-	printf("%d",ft_strcmp(a,b));
+	printf("%d\n",ft_strcmp(a,b));
 	return (0);
 }*/

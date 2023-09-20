@@ -1,50 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 11:00:59 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/20 11:02:57 by mrahim           ###   ########.KL       */
+/*                                                                            */
+/* ************************************************************************** */
 char	*ft_strstr(char *str, char *to_find)
 {
-	int i;
-	int j;
-	int mark;
+	int	i;
+	int	j;
 
 	i = 0;
-	mark = 0;
-
+	j = 0;
 	if (to_find[0] == '\0')
-	{
 		return (str);
-	}
-
 	while (str[i] != '\0')
 	{
-		if (str[i] == to_find[i])
+		j = 0;
+		while (str[i + j] != '\0' && str [i + j] == to_find[j])
 		{
-			mark = i;
-			j = 0;
-			while (to_find[j] != '\0')
-			{
-				i++;
-				j++;
-			}
-			return (str + mark);
-		} else
-		{
-			i++;
+			if (to_find[j + 1] == '\0')
+				return (&str[i]);
+			j++;
 		}
-	i}
-	return (0);	
+		i++;
+	}
+	return (0);
 }
+/*
+#include <string.h>
+#include <stdio.h>
 
- #include <string.h>
- #include <stdio.h>
- int main(void)
- {
-     char *test1 = "Hello Beautiful World";
-     char *test2 = "Beau";
-     char *i = strstr(test1, test2);
-     char *j = ft_strstr(test1, test2);
-     printf("%s\n", i);
-      printf("%s\n", j);
-      return (0);
-  }
+int	main()
+{
+	char *a = "This is ayam goreng";
+	char *b = "ayam";
 
-
-
-
+	printf("%s\n",ft_strstr(a,b));
+	printf("%s\n",strstr(a,b));
+	return (0);
+}*/

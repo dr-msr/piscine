@@ -1,56 +1,66 @@
-unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 12:19:30 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/20 15:35:08 by mrahim           ###   ########.KL       */
+/*                                                                            */
+/* ************************************************************************** */
+int	ft_strlen(char *str)
 {
-	int size_i;
-	size_i = size;
-
-	int src_length;
-	int dest_length;
-	int i;
-	int j;
-	int k;
-
-
-	// count size source 
+	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
-	{
+	while (str[i] != '\0')
 		i++;
-	}
-	src_length = i;
+	return (i);
+}
 
-	// count size destination
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	src_length;
+	unsigned int	dest_length;
+	unsigned int	j;
+	unsigned int	k;
+
+	src_length = ft_strlen(src);
 	j = 0;
 	while (dest[j] != '\0')
 	{
 		j++;
 	}
 	dest_length = j;
-
-	// check if size is 0 or not enough space in destination, returns total size required
-	if (size_i == 0 || size_i < dest_length)
-		return (src_length + size_i);
-	
-
+	if (size == 0 || size < dest_length)
+		return (src_length + size);
 	k = 0;
-	while (src[k] != '\0' && k < size_i - dest_length - 1) // if enough space, copy the src into end of dest, reserve 1 for null
+	while (src[k] != '\0' && k < size - dest_length - 1)
 	{
 		dest[j] = src[k];
 		j++;
 		k++;
 	}
-	dest[j] = '\0'; //terminating the whole string with null
-	return (dest_length + src_length); // returns new size
+	dest[j] = '\0';
+	return (dest_length + src_length);
 }
-
-/* #include <string.h>
+/*
+#include <string.h>
 #include <stdio.h>
 
-int main() {
+int main() {	
+	char dest[20] = "Hello, ";
+	char *src = "world!";
 
-	char a[] = "This is ayam goreng.";
-	char b[] = "Ayam goreng is sedap.";
-	
-	printf("%d\n", ft_strlcat(a,b,25));
-	printf("%s\n", a);
-} */
+	printf("\n## Before ft_strlcat:\n");
+	printf("## Destination : %s\n", dest);
+	printf("## Source :%s\n", src);
+
+	int result2 = ft_strlcat(dest, src, 13);
+
+	printf("\n## After ft_strlcat:\n");
+	printf("## Destination : %s\n", dest);
+	printf("## Result (return value of ft_strlcat) : %d\n\n", result2);
+    return 0;
+}*/
