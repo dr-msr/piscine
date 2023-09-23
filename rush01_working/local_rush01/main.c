@@ -5,7 +5,7 @@ void    ft_putchar(char a)
     write(1,&a,1);
 }
 
-int	check_col_up(int grid[4][4],int input[4], int row, int col)
+int	check_up(int grid[4][4],int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -28,7 +28,7 @@ int	check_col_up(int grid[4][4],int input[4], int row, int col)
 	return (0);
 }
 
-int	check_col_down(int grid[4][4], int input[4], int row, int col)
+int	check_down(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -52,7 +52,7 @@ int	check_col_down(int grid[4][4], int input[4], int row, int col)
 	return (0);
 }
 
-int	check_row_left(int grid[4][4], int input[4], int row, int col)
+int	check_left(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -75,7 +75,7 @@ int	check_row_left(int grid[4][4], int input[4], int row, int col)
 	return (0);
 }
 
-int	check_row_right(int grid[4][4], int input[4], int row, int col)
+int	check_right(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -102,10 +102,10 @@ int	check_row_right(int grid[4][4], int input[4], int row, int col)
 int	ft_check(int grid[4][4], int input[4][4], int row, int column)  // combine 4 criteria into binary output
 {
 	if (
-        !check_col_up(grid, input[0], row, column) || 
-		!check_col_down(grid, input[1], row, column) ||
-		!check_row_left(grid, input[2], row, column) ||
-		!check_row_right(grid, input[3], row, column)
+        !check_up(grid, input[0], row, column) || 
+		!check_down(grid, input[1], row, column) ||
+		!check_left(grid, input[2], row, column) ||
+		!check_right(grid, input[3], row, column)
 	)
 		return (0);
 	return (1);
