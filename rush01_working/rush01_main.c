@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <unistd.h>
 
 void    ft_putchar(char a)
@@ -5,7 +6,7 @@ void    ft_putchar(char a)
     write(1,&a,1);
 }
 
-int	check_up(int grid[4][4],int input[4], int row, int col)
+int	check_col_up(int grid[4][4],int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -28,7 +29,7 @@ int	check_up(int grid[4][4],int input[4], int row, int col)
 	return (0);
 }
 
-int	check_down(int grid[4][4], int input[4], int row, int col)
+int	check_col_down(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -52,7 +53,7 @@ int	check_down(int grid[4][4], int input[4], int row, int col)
 	return (0);
 }
 
-int	check_left(int grid[4][4], int input[4], int row, int col)
+int	check_row_left(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -75,7 +76,7 @@ int	check_left(int grid[4][4], int input[4], int row, int col)
 	return (0);
 }
 
-int	check_right(int grid[4][4], int input[4], int row, int col)
+int	check_row_right(int grid[4][4], int input[4], int row, int col)
 {
 	int	i;
 	int	count_view;
@@ -102,10 +103,10 @@ int	check_right(int grid[4][4], int input[4], int row, int col)
 int	ft_check(int grid[4][4], int input[4][4], int row, int column)  // combine 4 criteria into binary output
 {
 	if (
-        !check_up(grid, input[0], row, column) || 
-		!check_down(grid, input[1], row, column) ||
-		!check_left(grid, input[2], row, column) ||
-		!check_right(grid, input[3], row, column)
+      !check_col_up(grid, input[0], row, column) || 
+		!check_col_down(grid, input[1], row, column) ||
+		!check_row_left(grid, input[2], row, column) ||
+		!check_row_right(grid, input[3], row, column)
 	)
 		return (0);
 	return (1);
@@ -153,16 +154,19 @@ int ft_solve(int grid[4][4], int input[4][4], int row, int col) {
                     return 1;
                 }
             }
+
             grid[row][col] = 0; // if failed ft_check, resets back coordinate value to 0 and backtrack
         }
     }
+
     return 0; // if failed ft_notDuplicate (detect as duplicate), backtrack 
 }
+
 
 void ft_printgrid(int grid[4][4]) // prints the grid (solution)
 {
    int i = 0;
-   int j;
+    int j;
 
     while (i < 4)
     {
@@ -178,15 +182,16 @@ void ft_printgrid(int grid[4][4]) // prints the grid (solution)
     }
 }
 
-int main() { // start here
+/*int main() { // start here
 
     int grid[4][4] = { {0} }; // initialize grid
+
     int input[4][4] = { // convert input to grid. this is template only
 
-        {3, 2, 2, 1},
-        {2, 3, 1, 2},
-        {4, 2, 1, 2},
-        {1, 2, 4, 1}
+        {1, 2, 2, 2},
+        {4, 3, 2, 1},
+        {1, 2, 3, 4},
+        {2, 2, 2, 1}
 
  //       {2, 3, 3, 1},
  //       {3, 1, 2, 3},
@@ -197,15 +202,69 @@ int main() { // start here
  //       {4, 2, 1, 4},
  //       {2, 2, 1, 3},
  //       {1, 2, 3, 2}
+
     };
-
-
-//	ft_printgrid(grid);
 
     if (ft_solve(grid, input, 0, 0)) { // run ft_solve, returns 1 if solved
         ft_printgrid(grid); // if solved, print the finalized grid (solution)
     } else {
         write(1,"Error\n",6); // if returns 0 (no solution), prints error.
     }
+
     return 0;
+}*/
+int ft_atoi(char* str)
+{
+    // Initialize result
+    int result = 0;
+    int i;
+    i = 0;
+    
+    while (str[i] != '\0')
+    {
+        result = result * 10 + str[i] - '0';
+        // result with gets one digit placement holder at the end
+        // then plus with value of str converted to int
+        i++;
+    }
+    // return result.
+    return (result);
+}
+
+int main(int argc, char **argv)
+{  
+    int i;
+    int j;
+    i = 0;
+    j = 0;
+
+    int grid[4][4] = {{0}}; // initialize grid
+
+    int input[4][4];
+
+    if (argc != 17)
+    {
+        write(1, "Must be only 16 int!", 20);
+    }
+    while (i < 4)
+    {
+        while (j < 4)
+        {
+            int index = i * 4 + j + 1; // calculates the place to take argument from
+            input[i][j] = ft_atoi(argv[index]); // will take the argument according to number, top -> bottom -> left -> right
+            j++;
+        }
+        i++;
+    }
+    
+    if (ft_solve(grid, input, 0, 0)) // run ft_solve, returns 1 if solved
+    { 
+        ft_printgrid(grid); // if solved, print the finalized grid (solution)
+    } 
+    else 
+    {
+        write(1,"Error\n",6); // if returns 0 (no solution), prints error.
+    }
+
+    return (0);
 }
