@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_power.c                               :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 13:03:24 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/25 12:55:07 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/25 11:55:55 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/25 12:52:03 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_recursive_power(int nb, int power)
+int	ft_sqrt(int nb)
 {
-	int	result;
+	int	count;
 
-	result = nb;
-	if (power > 0)
-		return (nb * ft_recursive_power(nb, power - 1));
-	else if
-		(power < 0)
-			return (0);
-	else if
-		(power == 0)
-			return (1);
-	return (result);
+	if (nb <= 0)
+		return (0);
+	if (nb == 1)
+		return (1);
+	count = 2;
+	while (count < nb)
+	{
+		if (count * count == nb)
+			return (count);
+	count++;
+	}
+	return (0);
 }
 /*
 #include <stdio.h>
 
 int	main(void)
 {
-	printf("%d\n",ft_recursive_power(2,2));
-	return (0);
+	int output;
+	int input;
+
+	input = 1;
+	output = ft_sqrt(input);
+
+	printf("The sqrt for %d is %d\n",input,ft_sqrt(input));
+	return (output);
 }*/

@@ -6,14 +6,14 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:34:32 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/21 13:02:58 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/25 12:56:02 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_iterative_power(int nb, int power)
 {
-	int result;
-	
+	int	result;
+
 	result = 1;
 	while (power != 0)
 	{
