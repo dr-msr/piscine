@@ -29,8 +29,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_checkerror(char *base)
+int	ft_checkerror(char *base, int length)
 {
+	int	i;
+	int	j;
+
 	if (base[0] == '\0' || length == 1)
 		return (1);
 	i = 0;
@@ -47,6 +50,7 @@ int	ft_checkerror(char *base)
 		}
 	i++;
 	}
+	return (0);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
@@ -54,12 +58,10 @@ void	ft_putnbr_base(int nbr, char *base)
 	int	length;
 	int	output;
 	int	error;
-	int	i;
-	int	j;
 
 	output = nbr;
 	length = ft_strlen(base);
-	error = ft_checkerror(base);
+	error = ft_checkerror(base, length);
 	if (error == 0)
 	{
 		if (output < 0)
@@ -83,11 +85,11 @@ int	main(void)
 	int		input;
 
 //	char*	base = "0123456789"; // decimal
-	char*	base = "01"; // binary
-//	char*	base = "0123456789ABCDEF"; // hexa
+//	char*	base = "01"; // binary
+	char*	base = "0123456789ABCDEF"; // hexa
 //	char*	base = "poneyvif"; // octal
 
-	input = -100;
+	input = -1234;
 
 	ft_putnbr_base(input,base);
 	return (0);
