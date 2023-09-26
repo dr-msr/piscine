@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 12:38:23 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/26 10:02:33 by mrahim           ###   ########.KL       */
+/*   Created: 2023/09/20 12:32:57 by mrahim            #+#    #+#             */
+/*   Updated: 2023/09/20 12:37:59 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
-	{
-		write (1, &str[i], 1);
 		i++;
-	}
+	return (i);
 }
 /*
+#include <stdio.h>
+
 int	main(void)
 {
-	char *a = "This is Sparta.\n";
-	ft_putstr(a);
+	char *a = "This is 42KL.";
+	int i = ft_strlen(a);
+	printf("%s\n",a);
+	printf("%d\n",i);
 	return (0);
 }*/

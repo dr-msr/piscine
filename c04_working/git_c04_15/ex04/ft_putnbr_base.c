@@ -6,7 +6,7 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 08:11:33 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/26 10:18:04 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/25 09:51:00 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_checkerror(char *base, int length)
+int	ft_checkerror(char *base)
 {
-	int	i;
-	int	j;
-
 	if (base[0] == '\0' || length == 1)
 		return (1);
 	i = 0;
@@ -50,7 +47,6 @@ int	ft_checkerror(char *base, int length)
 		}
 	i++;
 	}
-	return (0);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
@@ -58,10 +54,12 @@ void	ft_putnbr_base(int nbr, char *base)
 	int	length;
 	int	output;
 	int	error;
+	int	i;
+	int	j;
 
 	output = nbr;
 	length = ft_strlen(base);
-	error = ft_checkerror(base, length);
+	error = ft_checkerror(base);
 	if (error == 0)
 	{
 		if (output < 0)

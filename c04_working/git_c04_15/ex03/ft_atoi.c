@@ -6,10 +6,22 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:36:13 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/26 10:17:45 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/21 08:18:06 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
+
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
 
 int	trim_sign(char *str, int *mark)
 {
@@ -18,15 +30,13 @@ int	trim_sign(char *str, int *mark)
 
 	i = 0;
 	count = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	while (str[i] != '\0' && (str[i] == 43 || str[i] == 45))
+	while (!(str[i] >= '0' && str[i] <= '9'))
 	{
-		if (str[i] == 45)
+		if (str[i] == '-')
 		{
 			count++;
 		}
-	i++;
+		i++;
 	}
 	*mark = i;
 	if (count % 2 == 1)
@@ -56,9 +66,10 @@ int	ft_atoi(char *str)
 
 int main(void)
 {
-	char *a = "  ----+--+1234ab567";
+	char *a = "  ---+--+1234ab567";
 	printf("%d",ft_atoi(a));
 	printf("\n");
-	printf("%s\n",a);
+	ft_putstr(a);
+	ft_putstr("\n");
 	return (0);
 }*/

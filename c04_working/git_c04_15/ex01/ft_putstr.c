@@ -6,13 +6,13 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:38:23 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/26 10:02:33 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/20 12:44:47 by mrahim           ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+void	ft_putchar(char *str)
 {
 	int	i;
 
@@ -27,6 +27,6 @@ void	ft_putstr(char *str)
 int	main(void)
 {
 	char *a = "This is Sparta.\n";
-	ft_putstr(a);
+	ft_putchar(a);
 	return (0);
 }*/
