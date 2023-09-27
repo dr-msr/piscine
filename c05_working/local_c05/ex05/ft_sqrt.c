@@ -6,7 +6,7 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:55:55 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/25 12:52:03 by mrahim           ###   ########.KL       */
+/*   Updated: 2023/09/27 13:19:07 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_sqrt(int nb)
 	if (nb == 1)
 		return (1);
 	count = 2;
-	while (count < nb)
+	while (count * count <= nb && count <= 46340)
 	{
 		if (count * count == nb)
 			return (count);

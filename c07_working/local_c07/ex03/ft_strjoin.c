@@ -80,6 +80,6 @@ int	main(void)
 	char	*strs[] = {"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 	char	sep[] = " -- ";
 
-	printf("OUTPUT: %s\n", ft_strjoin(size, strs, sep));
+	printf("Output : %s\n", ft_strjoin(size, strs, sep));
 	return (0);
 }
