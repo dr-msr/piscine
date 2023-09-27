@@ -40,7 +40,7 @@ int	main(void)
 
 	while (i < (max - min))
 	{
-		printf("%d", array[i]);
+		printf("%d\n", array[i]);
 		i++;
 	}
 	free(array);
