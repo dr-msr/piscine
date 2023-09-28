@@ -1,0 +1,1 @@
+cat /etc/passwd | sed '1,10d' | sed -n 'p;n' | sed -n "$FT_LINE1,$FT_LINE2 p" | sed 's/:.*//' | rev | sort -r | tr '\n' ', ' | sed 's/,$/./'
