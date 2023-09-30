@@ -89,7 +89,10 @@ void	load_dict(char *dict)
 		copy = 0;
 		while (dict_buffer[i] != ':')
 		{
-			dict_array[row][0][copy] = dict_buffer[i];
+			/* clean up from dictionary : to skip whitespaces */
+			/* ◦ You will trim the spaces before and after the value in the dictionary. */
+			/* Syamirul todo */
+			dict_array[row][0][copy] = dict_buffer[i]; 
 			copy++;
 			i++;
 		}
@@ -98,6 +101,9 @@ void	load_dict(char *dict)
 		copy = 0;
 		while (dict_buffer[i] != '\n' && i < buffer_size)
 		{
+			/* clean up from dictionary : to skip whitespaces */
+			/* ◦ You will trim the spaces before and after the value in the dictionary. */
+			/* Syamirul todo */
 			dict_array[row][1][copy] = dict_buffer[i];
 			copy++;
 			i++;
