@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include <dirent.h>
 
-
-
 char	***dict_array;
 
 void	ft_putstr(char *str)
@@ -67,7 +65,6 @@ void init_dict()
 	}
 
 }
-
 
 int	load_dict(char *dict)
 {
@@ -128,7 +125,6 @@ int	load_dict(char *dict)
 		row++;
 		i++;
 	}
-
 	return (0);
 
 }
@@ -168,24 +164,13 @@ void	trim_dict(void)
 
 void 	intro()
 {
-	char *default_dir;
-
 	ft_putstr("====================================================\n");
 	ft_putstr("|               42KL Proudly Presents              |\n");
 	ft_putstr("|             Number To Word Dictionary            |\n");
 	ft_putstr("====================================================\n");
 	ft_putstr("Default Dictionary :\n     ");
-
-	default_dir = getenv("DEFAULT_DICT");
-
-	ft_putstr(default_dir);
+	ft_putstr("numbers.dict");
 	ft_putstr("\nAvailable Dictionaries :\n");
-
-
-
-
-
-
 
 	DIR* dObj;
     struct dirent* dir;
@@ -208,10 +193,19 @@ void 	intro()
     }
 
 	ft_putstr("====================================================\n");
-	ft_putstr("To change default dictionary, run: \n");
-	ft_putstr("     --setDefault \"dictionary name\"\n");
-	ft_putstr("     --setDefault \"numbers.dict\" (example)\n");
+	ft_putstr("USAGE :\n");
+	ft_putstr("    <dictionary> <number> // specified dictionary\n");
+	ft_putstr("    nombor.dict 1234 (example)\n\n");
+	ft_putstr("    <number> // default dictionary\n");
+	ft_putstr("    1234 (example)\n");
 	ft_putstr("====================================================\n");
+	ft_putstr("LIMITATIONS :\n");
+	ft_putstr("    Unfortunately within the timeframe, we are     \n");
+	ft_putstr("    unable to make the program compute a number    \n");
+	ft_putstr("    bigger than 999,999,999. \n");
+	ft_putstr("====================================================\n");
+	ft_putstr("               mrahim | aawgku-o | sting | kkhai-ki \n\n");
+
 
 
 
@@ -283,7 +277,7 @@ int		ft_check_number(char a)
 	return (0);
 }
 
-void	ft_construct_number(char *str, int *output)
+void	ft_construct_number(char *str, unsigned long long *output)
 {
 	while (ft_check_number(*str) == 1)
 	{
@@ -299,10 +293,10 @@ void	ft_construct_number(char *str, int *output)
 	}
 }
 
-int		ft_atoi(char *str)
+unsigned long long		ft_atoi(char *str)
 {
 	unsigned int	counter;
-	int				output;
+	unsigned long long				output;
 
 	output = 0;
 	counter = 0;
@@ -379,12 +373,8 @@ char *ft_itoa(int nb)
 }
 
 
-int	conversion(char *a)
-{
-	return (*a - '0');
-}
 
-void print_sa(int n)
+void print_base(int n)
 {
 	int row;
 	row = 0;
@@ -393,55 +383,7 @@ void print_sa(int n)
 		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
 			{
 				ft_putstr(dict_array[row][1]);
-			}
-		row++;
-	}
-}
-
-void print_puluh(int n)
-{
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
-	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-			}
-		row++;
-	}
-}
-
-void print_ratus(int n)
-{
-	n = n / 100;
-
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
-	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-				ft_putstr(" hundred");
-
-			}
-		row++;
-	}
-}
-
-void print_ribu(int n)
-{
-	n = n / 1000;
-
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
-	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-				ft_putstr(" thousands");
+				ft_putstr(" ");
 
 			}
 		row++;
@@ -449,69 +391,72 @@ void print_ribu(int n)
 }
 
 
-void init_print_thousand(char *input)
+
+
+void init_print_trio(char *input, int level, int increment)
 {
 	int input_len = ft_strlen(input);
 
-	int sa_ri = input[input_len - 4] - '0';
-	int pu_ri = input[input_len - 5] - '0';
-	pu_ri = pu_ri * 10;
-
-	int ra_ri = input[input_len - 6] - '0';
-	ra_ri = ra_ri * 100;
-
-	print_ratus(ra_ri);
-	ft_putstr(" ");
-	print_puluh(pu_ri);
-	ft_putstr(" ");
-	print_sa(sa_ri);
-	ft_putstr(" ");
-	ft_putstr("thousand");
-}
-
-void init_print_hundred(char *input)
-{
-	int input_len = ft_strlen(input);
-
+	int sa = input[input_len - ((increment * 3) + 1)] - '0';
+	int pu = input[input_len - ((increment * 3) + 2)] - '0';
+	int ra = input[input_len - ((increment * 3) + 3)] - '0';
 	
+	if (level == 100)
+	{
+	 	print_base(ra);
+		init_print_trio(input,10,increment);
+	}
+	if (level == 10)
+	{
 
-	int sa = input[input_len - 1] - '0';
-	int pu = input[input_len - 2] - '0';
-	pu = pu * 10;
+		if (((pu * 10) + sa) >= 11 && ((pu * 10) + sa) <= 19)
+		{
 
-	int ra = input[input_len - 3] - '0';
-	ra = ra * 100;
-	print_ratus(ra);
-	ft_putstr(" ");
-	print_puluh(pu);
-	ft_putstr(" ");
-	print_sa(sa);
-	
+			int belas = (pu * 10) + sa;
+			int row = 0;
+			while (row < 50)
+			{
+				if (ft_strcmp(ft_itoa(belas),dict_array[row][0]) == 0)
+				{
+					ft_putstr(dict_array[row][1]);
+					ft_putstr(" ");
 
+				}
+				row++;
+			}
+		}
+		else
+		{
+
+		int row = 0;
+			while (row < 50 && pu != 0)
+			{
+				if (ft_strcmp(ft_itoa(pu * 10),dict_array[row][0]) == 0)
+				{
+					ft_putstr(dict_array[row][1]);
+					ft_putstr(" ");
+				}
+				row++;
+			}
+
+		if (sa != 0)
+			print_base(sa);
+		}
+
+	}
+	if (level == 1)
+		print_base(sa);
 }
-
-
 int	main(int argc, char *argv[])
 {
 	char *input;
 	char *ref_dict;
-	char *def_dict;
-
-	if ((def_dict = getenv("DEFAULT_DICT")) == NULL)
-	{
-		if (init_default_env() == -1)
-				return (-1);
-	}
-
-
 
 	if (argc == 1)
 	{
 		intro();
 		return (1);
 	}
-
-
 	if (argc < 2 || argc > 3)
 	{
 		ft_putstr("Please input 1 or 2 arguments.");
@@ -520,22 +465,10 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		input = argv[1];
-		ref_dict = getenv("DEFAULT_DICT");
-	
-
+		ref_dict = "numbers.dict";
 	}
 	if (argc == 3)
 	{
-
-		if (ft_strcmp(argv[1],"--setDefault") == 0)
-		{
-			if ((setenv("DEFAULT_DICT",argv[2],1)) == 0 )
-			{
-				printf("Succesfully changed default dictionary to %s.",getenv("DEFAULT_DICT"));
-				return (0);
-			}
-
-		}
 		ref_dict = argv[1];
 		input = argv[2];
 	}
@@ -546,134 +479,57 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 
-
 	init_dict();
 	
 	if (load_dict(ref_dict) == 1)
 	{
 		free(dict_array);
-		//unsetenv("DEFAULT_DICT");
 		return (1);
 	}
-
 	trim_dict();
 
 
-
-	
-
-	int raw = ft_atoi(input);
-
-	if (raw > 999)
-	{
-		init_print_thousand(input);
-	}
-	init_print_hundred(input);
-
-	
-
-
-	
-
-	
-
-
-
-
-
-
-
-    // int input_len = ft_strlen(input);
-    // int i = 0;
-
-    // while (i < input_len)
-    // {
-    //     int row = 0;
-    //     int match_length = 0;
-    //     int best_match_length = 0;
-    //     int best_match_index = -1;
-
-    //     while (row < 50)
-    //     {
-    //         int j = 0;
-    //         while (input[i + j] == dict_array[row][0][j])
-    //         {
-    //             j++;
-    //             if (dict_array[row][0][j] == '\0')
-    //             {
-    //                 match_length = j;
-    //                 break;
-    //             }
-    //         }
-
-    //         if (match_length > best_match_length)
-    //         {
-    //             best_match_length = match_length;
-    //             best_match_index = row;
-    //         }
-
-    //         row++;
-    //     }
-
-    //     if (best_match_index != -1)
-    //     {
-    //         printf("%s", dict_array[best_match_index][1]);
-    //         i += best_match_length;
-    //     }
-    //     else
-    //     {
-    //         i++;
-    //     }
-    // }
-
-
-
-	//int length;
-	// int row;
-	// int i;
-	
-	// //length = ft_strlen(input);
-	// i = 0;
-	// while (input[i] != '\0')
-	// {
-	// 	row = 0;
-
-	// 	while (row < 50)
-	// 	{
-	// 	if (input[i] == dict_array[row][0][i])
-	// 	{
-	// 		printf("%s",dict_array[row][1]);
-	// 		break;
-	// 	}
-	// 	row++;
-	// 	}
-	// 	i++;
-	// }
-
-	
-
-// printf("\nKey : %s \n",dict_array[5][0]);
-// printf("Value : %s \n\n",dict_array[5][1]);
-	
-
-
-
-
-
-//  int start;
-//  int end;
-//  start = 0;
-//  end = 10;
-//  while (start <= end)
-//  {
-//  	printf("%s : %s \n",dict_array[start][0], dict_array[start][1]);
-//  	start++;
-//  }
-//   	printf("\n%s : %s \n",dict_array[7][0], dict_array[7][1]);
-
+	unsigned long long raw = ft_atoi(input);
+	 if (raw >= 1000000000000000)
+		{
+		init_print_trio(input,100,5);
+		1000;
+	 	}
+	 if (raw >= 1000000000000)
+		{
+		init_print_trio(input,100,4);
+		ft_putstr("trillion ");
+	 	}
+	 if (raw >= 1000000000)
+		{
+		init_print_trio(input,100,3);
+		ft_putstr("billion ");
+	 	}
+	 if (raw >= 1000000)
+		{
+		init_print_trio(input,100,2);
+		ft_putstr("million ");
+	 	}
+	 if (raw >= 1000 )
+		{
+		init_print_trio(input,100,1);
+		ft_putstr("thousand ");
+	 	}
+	 if (raw >= 100)
+		{
+	 	init_print_trio(input,100,0);
+		ft_putstr("hundred ");
+	 	}
+	if (raw >= 10 && raw < 100)
+		{
+		init_print_trio(input,10,0);
+		}
+	if (raw > 0 && raw < 10)
+		{
+		init_print_trio(input,1,0);
+		}
 
 	free(dict_array);
-//	unsetenv("DEFAULT_DICT");
 	return (0);
 
 }

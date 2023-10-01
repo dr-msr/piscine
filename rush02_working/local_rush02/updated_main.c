@@ -277,7 +277,7 @@ int		ft_check_number(char a)
 	return (0);
 }
 
-void	ft_construct_number(char *str, int *output)
+void	ft_construct_number(char *str, unsigned long long *output)
 {
 	while (ft_check_number(*str) == 1)
 	{
@@ -293,10 +293,10 @@ void	ft_construct_number(char *str, int *output)
 	}
 }
 
-int		ft_atoi(char *str)
+unsigned long long		ft_atoi(char *str)
 {
 	unsigned int	counter;
-	int				output;
+	unsigned long long				output;
 
 	output = 0;
 	counter = 0;
@@ -373,72 +373,9 @@ char *ft_itoa(int nb)
 }
 
 
-int	conversion(char *a)
+
+void print_base(int n)
 {
-	return (*a - '0');
-}
-
-int	count_zero(int level)
-{
-if (level == 100)
-	return (0);
-if (level == 1000)
-	return (3);
-if (level == 1000000)
-	return (6);
-return (1);
-}
-
-
-
-
-int ft_print_denominator(long i)
-{
-	int row;
-	row = 0;
-
-	while (row <= 50 && i != 0)
-	{
-		if (ft_strcmp(ft_itoa(i),dict_array[row][0]) == 0)
-		{
-			ft_putstr(dict_array[row][1]);
-		}
-		row++;
-	}
-	return (0);
-}
-
-void print_sa(int n)
-{
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
-	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-			}
-		row++;
-	}
-}
-
-void print_puluh(int n)
-{
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
-	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-			}
-		row++;
-	}
-}
-void print_ratus(int n)
-{
-	n = n / 100;
-
 	int row;
 	row = 0;
 	while (row <= 50 && n != 0)
@@ -447,93 +384,69 @@ void print_ratus(int n)
 			{
 				ft_putstr(dict_array[row][1]);
 				ft_putstr(" ");
-				ft_print_denominator(100);
 
 			}
 		row++;
 	}
 }
 
-void print_million(int n)
+
+
+
+void init_print_trio(char *input, int level, int increment)
 {
-	n = n / 1000;
-	int row;
-	row = 0;
-	while (row <= 50 && n != 0)
+	int input_len = ft_strlen(input);
+
+	int sa = input[input_len - ((increment * 3) + 1)] - '0';
+	int pu = input[input_len - ((increment * 3) + 2)] - '0';
+	int ra = input[input_len - ((increment * 3) + 3)] - '0';
+	
+	if (level == 100)
 	{
-		if (ft_strcmp(ft_itoa(n),dict_array[row][0]) == 0)
-			{
-				ft_putstr(dict_array[row][1]);
-				ft_putstr(" ");
-				ft_print_denominator(1000000);
-
-			}
-		row++;
+	 	print_base(ra);
+		init_print_trio(input,10,increment);
 	}
-}
+	if (level == 10)
+	{
 
-void	print_belas(int pu, int sa)
-{
-		if ((pu + sa) >= 11 && (pu + sa) <= 19)
+		if (((pu * 10) + sa) >= 11 && ((pu * 10) + sa) <= 19)
 		{
-			int belas = pu + sa;
+
+			int belas = (pu * 10) + sa;
 			int row = 0;
 			while (row < 50)
 			{
 				if (ft_strcmp(ft_itoa(belas),dict_array[row][0]) == 0)
 				{
 					ft_putstr(dict_array[row][1]);
+					ft_putstr(" ");
+
 				}
 				row++;
 			}
 		}
 		else
 		{
-			print_puluh(pu);
-			ft_putstr(" ");
-			print_sa(sa);
+
+		int row = 0;
+			while (row < 50 && pu != 0)
+			{
+				if (ft_strcmp(ft_itoa(pu * 10),dict_array[row][0]) == 0)
+				{
+					ft_putstr(dict_array[row][1]);
+					ft_putstr(" ");
+				}
+				row++;
+			}
+
+		if (sa != 0)
+			print_base(sa);
 		}
+
+	}
+	if (level == 1)
+		print_base(sa);
 }
-
-void	ft_print_belasratus(int sa, int pu, int ra)
-{
-	pu = pu * 10;
-	ra = ra * 100;
-	
-	print_ratus(ra);
-	ft_putstr(" ");
-	print_belas(pu, sa);
-}
-
-void init_print(char *input, int level)
-{
-	int input_len = ft_strlen(input);
-
-	int sa = input[input_len - (count_zero(level) + 1)] - '0';
-	int pu = input[input_len - (count_zero(level) + 2)] - '0';
-	int ra = input[input_len - (count_zero(level) + 3)] - '0';
-
-	ft_print_belasratus(sa, pu, ra);
-	ft_putstr(" ");
-	ft_print_denominator(level);	
-	ft_putstr(" ");
-}
-
-
-void init_print_base(char *input)
-{
-	int input_len = ft_strlen(input);
-
-	int sa = input[input_len - 1] - '0';
-	int pu = input[input_len - 2] - '0';
-	int ra = input[input_len - 3] - '0';
-
-	ft_print_belasratus(sa, pu, ra);
-	ft_putstr(" ");
-	ft_putstr(" ");
-}
-
-
 int	main(int argc, char *argv[])
 {
 	char *input;
@@ -544,8 +457,6 @@ int	main(int argc, char *argv[])
 		intro();
 		return (1);
 	}
-
-
 	if (argc < 2 || argc > 3)
 	{
 		ft_putstr("Please input 1 or 2 arguments.");
@@ -555,11 +466,9 @@ int	main(int argc, char *argv[])
 	{
 		input = argv[1];
 		ref_dict = "numbers.dict";
-
 	}
 	if (argc == 3)
 	{
-
 		ref_dict = argv[1];
 		input = argv[2];
 	}
@@ -578,22 +487,48 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	trim_dict();
-	long raw = ft_atoi(input);
-	if (raw > 999999999)
-	 	{
-	 	ft_putstr("Sorry we are not able to compute beyond this number.\n");
-		free(dict_array);
-		return (0);
-	 	}
-	 if (raw > 999999)
-	 	{
-	 	init_print(input,1000000);
-	 	}
-	 if (raw > 999)
+
+
+	unsigned long long raw = ft_atoi(input);
+	 if (raw >= 1000000000000000)
 		{
-	 	init_print(input,1000);
+		init_print_trio(input,100,5);
+		1000;
 	 	}
-	init_print_base(input);
+	 if (raw >= 1000000000000)
+		{
+		init_print_trio(input,100,4);
+		ft_putstr("trillion ");
+	 	}
+	 if (raw >= 1000000000)
+		{
+		init_print_trio(input,100,3);
+		ft_putstr("billion ");
+	 	}
+	 if (raw >= 1000000)
+		{
+		init_print_trio(input,100,2);
+		ft_putstr("million ");
+	 	}
+	 if (raw >= 1000 )
+		{
+		init_print_trio(input,100,1);
+		ft_putstr("thousand ");
+	 	}
+	 if (raw >= 100)
+		{
+	 	init_print_trio(input,100,0);
+		ft_putstr("hundred ");
+	 	}
+	if (raw >= 10 && raw < 100)
+		{
+		init_print_trio(input,10,0);
+		}
+	if (raw > 0 && raw < 10)
+		{
+		init_print_trio(input,1,0);
+		}
+
 	free(dict_array);
 	return (0);
 
