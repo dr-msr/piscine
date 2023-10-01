@@ -372,9 +372,48 @@ char *ft_itoa(int nb)
 	return (str);
 }
 
+int	ft_print_denominator(int level)
+{
+char str[50] = "1";
+char *zero;
+zero = "000";
 
 
-void print_base(int n)
+if (level == 0)
+{
+	ft_strcat(str, "00");
+}
+if (level == 1)
+{
+	ft_strcat(str, "000");
+}
+
+int i = 2;
+while (i <= level)
+{
+	ft_strcat(str, zero);
+	i++;
+}
+
+int row;
+row = 0;
+
+while (row <= 50)
+	{
+		if (ft_strcmp(str,dict_array[row][0]) == 0)
+			{
+				ft_putstr(dict_array[row][1]);
+				ft_putstr(" ");
+
+			}
+		row++;
+	}
+
+return (0);
+}
+
+
+void print_base(int n, int level)
 {
 	int row;
 	row = 0;
@@ -384,7 +423,8 @@ void print_base(int n)
 			{
 				ft_putstr(dict_array[row][1]);
 				ft_putstr(" ");
-
+				if (level == 100)
+					ft_putstr("hundred ");
 			}
 		row++;
 	}
@@ -403,7 +443,7 @@ void init_print_trio(char *input, int level, int increment)
 	
 	if (level == 100)
 	{
-	 	print_base(ra);
+	 	print_base(ra,100);
 		init_print_trio(input,10,increment);
 	}
 	if (level == 10)
@@ -438,14 +478,13 @@ void init_print_trio(char *input, int level, int increment)
 				}
 				row++;
 			}
-
 		if (sa != 0)
-			print_base(sa);
+			print_base(sa,1);
 		}
-
 	}
 	if (level == 1)
-		print_base(sa);
+		print_base(sa,1);
+
 }
 int	main(int argc, char *argv[])
 {
@@ -493,34 +532,33 @@ int	main(int argc, char *argv[])
 	 if (raw >= 1000000000000000)
 		{
 		init_print_trio(input,100,5);
-		1000;
+		ft_print_denominator(5);
 	 	}
 	 if (raw >= 1000000000000)
 		{
 		init_print_trio(input,100,4);
-		ft_putstr("trillion ");
+		ft_print_denominator(4);
 	 	}
 	 if (raw >= 1000000000)
 		{
 		init_print_trio(input,100,3);
-		ft_putstr("billion ");
+		ft_print_denominator(3);
 	 	}
 	 if (raw >= 1000000)
 		{
 		init_print_trio(input,100,2);
-		ft_putstr("million ");
+		ft_print_denominator(2);
 	 	}
 	 if (raw >= 1000 )
 		{
 		init_print_trio(input,100,1);
-		ft_putstr("thousand ");
+		ft_print_denominator(1);
 	 	}
 	 if (raw >= 100)
 		{
 	 	init_print_trio(input,100,0);
-		ft_putstr("hundred ");
 	 	}
-	if (raw >= 10 && raw < 100)
+	if (raw >= 10 && raw <= 99)
 		{
 		init_print_trio(input,10,0);
 		}
