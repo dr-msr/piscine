@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libc.h>
-#include <stdio.h> // for testing
+#include <stdlib.h>
+#include "ft_stock_str.h"
 
 int	ft_strlen(char *str)
 {
@@ -19,9 +19,7 @@ int	ft_strlen(char *str)
 
 	i = 0;
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -35,67 +33,61 @@ char	*ft_strcpy(char *dest, char *src)
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
+	dest[i + 1] = '\0';
 	return (dest);
 }
-
-typedef struct s_stock_str
-	{
-		int size;
-		char *str;
-		char *copy;
-	} 	t_stock_str;
 
 char	*ft_strdup(char *src)
 {
 	char	*dest;
 
-	dest = malloc(sizeof(char) * ft_strlen(src));
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
 	if (dest == NULL)
 		return (0);
 	ft_strcpy(dest, src);
 	return (dest);
 }
 
-struct s_stock_str *ft_strs_to_tab(int ac, char **av)
+struct	s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
+	int				i;
 	t_stock_str		*new_struct;
-	char 			*ori;
-	char			*dup;
-	int 			i;
-	int				length_in;
 
+	new_struct = malloc((ac + 1) * sizeof(t_stock_str));
+	if (new_struct == NULL)
+		return (NULL);
 	i = 0;
-	while (av[i] != '\0')
+	while (i < ac)
 	{
-		length_in = ft_strlen(av[i]);
-		new_struct = malloc(sizeof (t_stock_str));
-		ori = ft_strdup(av[i]);
-		dup = ft_strdup(av[i]);
-
-		new_struct->size = length_in;
-		new_struct->str = &ori;
-		new_struct->copy = &dup;
+		new_struct[i].size = ft_strlen(av[i]);
+		new_struct[i].str = av[i];
+		new_struct[i].copy = ft_strdup(av[i]);
 		i++;
 	}
-
+	new_struct[i].str = 0;
+	new_struct[i].copy = 0;
 	return (new_struct);
-
 }
+/* #include <stdio.h> // for testing
 
-int	main(void)
+int	main(int argc,char **argv)
 {
 	struct s_stock_str	*new_struct;
+	printf("\n");
+	new_struct = ft_strs_to_tab(argc, argv);
 
 
-	char *input[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-	char **array = input;
+	int i = 1;
+	while (i <= argc)
+	{
 
-	new_struct = ft_strs_to_tab(7, array);
+		printf("=====\nArray [%d]\n Size : %d \n",i, new_struct[i].size, );
+		printf)(" Str : %s \n Copy : %s\n",new_struct[i].str, new_struct[i].copy)
+		printf(" Address Ori : %p\n", new_struct[i].str);
+		printf(" Address Copy : %p\n\n", new_struct[i].copy);
+		i++;
+	}
+	printf("\n");
+	return (0);
 
-
-
-	printf("Size : %d \n Ori Satu : %s \n Copy Satu : %s\n", new_struct[1].size, new_struct[1].str, new_struct[1].copy );
-
-
-}
+}*/

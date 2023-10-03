@@ -13,6 +13,6 @@
 #ifndef FT_ABS_H
 # define FT_ABS_H
 
-# define ABS(value)		if ((value < 0)) { (value = -value);}
+# define ABS(Value)		(Value < 0 ? -Value : Value) 
 
 #endif
