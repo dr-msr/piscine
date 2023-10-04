@@ -10,129 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h> // testing purposes
 
-
-int	ft_check(char a, char *charset)
+int		has_char(char c, char *str)
 {
-	//printf("Check ft_check : %s = %c\n",charset,a);
-	int i;
-	i = 0;
-	while (charset[i] != '\0')
+	while (*str)
 	{
-		if (charset[i] == a)
-		{
-			//printf("Check ft_check : %c = %c\n",charset[i],a);
+		if (*str++ == c)
 			return (1);
-		}
-		i++;
 	}
 	return (0);
 }
-int	ft_wc(char *str, char *charset)
+
+int		strs_l(char *str, char *charset)
 {
-	int i;
-	int mark_start;
-	int total_length;
+	int	part;
+	int count;
 
-
-	i = 0;
-	total_length = 0;
-	mark_start = 0;
-
-
-	while (str[i] != '\0')
+	part = 1;
+	count = 0;
+	while (*str)
 	{
-		if ((ft_check(str[i],charset)) == 1)
+		if (!has_char(*str, charset) && part)
 		{
-			total_length = total_length + (i - mark_start) + 1;
-			//printf("Update : TL %d, WC %d\n",total_length,word_count);
-			mark_start = i + 1;
-			i++;
-		} 
-		i++;
+			count++;
+			part = 0;
+		}
+		else if (has_char(*str, charset))
+			part = 1;
+		str++;
 	}
-	total_length = total_length + (i - mark_start) + 1;
-	return (total_length);
+	return (count);
 }
 
-void	ft_alloc(char *str, char *charset, char **array)
+char	*ft_strdup(char *src, char *charset)
 {
-	int i;
-	int mark_start;
-	int array_count;
+	char	*dest;
+	char	*buffer;
+	int		length;
 
-
-	i = 0;
-	mark_start = 0;
-	array_count = 0;
-
-
-	while (str[i] != '\0')
-	{
-		if ((ft_check(str[i],charset)) == 1)
-		{
-			array[array_count] = malloc (sizeof (char) * (i - mark_start + 1));
-			//printf("Update : TL %d, WC %d\n",total_length,word_count);
-			mark_start = i + 1;
-			array_count++;
-			i++;
-		} 
-		i++;
-	}
-	array[array_count] = malloc (sizeof (char) * (i - mark_start + 1));
-	array[array_count + 1] = malloc (sizeof (char));
-
+	length = 0;
+	buffer = src;
+	while (*buffer && !has_char(*buffer++, charset))
+		length++;
+	dest = (char*)malloc(sizeof(*src) * length);
+	buffer = dest;
+	while (*src && length-- > 0)
+		*buffer++ = *src++;
+	*buffer = '\0';
+	return (dest);
 }
 
-void ft_map(char *str, char *charset, char **array)
-{
-	int i;
-	int j;
-	int array_count;
-
-	i = 0;
-	array_count = 0;
-	j = 0;
-
-
-	while (str[i] != '\0')
-	{
-		if ((ft_check(str[i],charset)) == 1)
-		{
-			array[array_count][j] = '\0';
-			array_count++;
-			j = 0;
-			i++;
-		} 
-		array[array_count][j] = str[i];
-		i++;
-		j++;
-	}
-	array[array_count][i + 1] = '\0';
-	array[array_count + 1][0] = '0';
-	array[array_count + 1][1] = '\0';
-
-}
 char	**ft_split(char *str, char *charset)
 {
-	char **array;
-	int total_length;
+	char	**strs;
+	char	**tmp;
+	int		part;
 
-	total_length = ft_wc(str, charset) + 3;
-	printf("Total length is : %d\n", total_length);
-	array = malloc(sizeof(char) * total_length);
-	ft_alloc(str, charset, array);
-	ft_map(str, charset, array);
-
-	return (array);
-
-
+	strs = (char**)malloc(strs_l(str, charset) * sizeof(*strs) + 1);
+	tmp = strs;
+	part = 1;
+	while (*str)
+	{
+		if (!has_char(*str, charset) && part)
+		{
+			part = 0;
+			*tmp = ft_strdup(str, charset);
+			tmp++;
+		}
+		else if (has_char(*str, charset))
+			part = 1;
+		str++;
+	}
+	*tmp = 0;
+	return (strs);
 }
 
-
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
