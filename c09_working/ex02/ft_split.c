@@ -15,140 +15,122 @@
 #include <stdio.h> // testing purposes
 
 
-
-int	ft_strlen(char *str)
+int	ft_check(char a, char *charset)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_check_charset(char a, char *charset)
-{
+	//printf("Check ft_check : %s = %c\n",charset,a);
 	int i;
-	int char_len;
-
-	char_len = ft_strlen(charset);
-
 	i = 0;
-	while (i < char_len)
+	while (charset[i] != '\0')
 	{
-		if (a == charset[i] || a == '\0')
+		if (charset[i] == a)
 		{
-			printf("%c == %c\n",a,charset[i]);
+			//printf("Check ft_check : %c = %c\n",charset[i],a);
 			return (1);
 		}
-		printf("%c =/= %c\n",a,charset[i]);
 		i++;
 	}
 	return (0);
 }
-
-int	ft_count_size(char *str, char *charset)
+int	ft_wc(char *str, char *charset)
 {
-	int	i = 0;
-	int count_size = 0;
-	int mark_char = 0;
-	int mark_end = 0;
+	int i;
+	int mark_start;
+	int total_length;
+
+
+	i = 0;
+	total_length = 0;
+	mark_start = 0;
+
 
 	while (str[i] != '\0')
 	{
-		if ((ft_check_charset(str[i],charset)) == 1 && mark_char != 0)
+		if ((ft_check(str[i],charset)) == 1)
 		{
-
-			mark_end = i;
-			count_size = count_size + (mark_end - mark_char);
-			mark_char = 0;
-			mark_end = 0;
+			total_length = total_length + (i - mark_start) + 1;
+			//printf("Update : TL %d, WC %d\n",total_length,word_count);
+			mark_start = i + 1;
 			i++;
-
-
 		} 
-		else if ((ft_check_charset(str[i],charset)) == 1 && (mark_char == 0))
-		{
-			mark_char = i;
-			i++;
-
-
-		} else
-		{
-			i++;
-		}
+		i++;
 	}
-	return (count_size);
+	total_length = total_length + (i - mark_start) + 1;
+	return (total_length);
 }
 
-char **ft_split(char *str, char *charset)
+void	ft_alloc(char *str, char *charset, char **array)
 {
-	// int	array_size;
-	// int i;
-	// int mark_char;
-	// int mark_end;
-	// int k;
-	 char **array;
-	// int count_array;
-	// int c;
-	// char *piece;
-	int count_size;
-
-	count_size =  ft_count_size(str,charset);
-
-	printf("Count size total : %d\n", count_size);
+	int i;
+	int mark_start;
+	int array_count;
 
 
-	// i = 0;
-	// count_array = 0;
-	// mark_char = 0;
-
-	 array = malloc(sizeof(char) * count_size + 1);
-
-	// while (str[i] != '\0')
-	// {
-	// 	if ((ft_check_charset(str[i],charset)) == 1 && mark_char != 0)
-	// 	{
-	// 		mark_end = i;
-
-	// 		array_size = mark_end - mark_char;
-
-	// 		piece = malloc(sizeof(char) * array_size + 1);
-
-	// 		k = mark_char;
-	// 		c = 0;
-	// 		while (k != i)
-	// 		{
-	// 			piece[c] = str[k];
-	// 			k++;
-	// 			c++;
-	// 		}
-	// 		piece[c] = '\0';
-
-	// 		array[count_array] = &piece[c];
-	// 		mark_char = 0;
-	// 		mark_end = 0;
-	// 		count_array++;
-	// 		i++;
+	i = 0;
+	mark_start = 0;
+	array_count = 0;
 
 
-	// 	} 
-	// 	else if ((ft_check_charset(str[i],charset)) == 1 && (mark_char == 0))
-	// 	{
-	// 		mark_char = i;
-	// 		i++;
+	while (str[i] != '\0')
+	{
+		if ((ft_check(str[i],charset)) == 1)
+		{
+			array[array_count] = malloc (sizeof (char) * (i - mark_start + 1));
+			//printf("Update : TL %d, WC %d\n",total_length,word_count);
+			mark_start = i + 1;
+			array_count++;
+			i++;
+		} 
+		i++;
+	}
+	array[array_count] = malloc (sizeof (char) * (i - mark_start + 1));
+	array[array_count + 1] = malloc (sizeof (char));
 
-
-	// 	} else
-	// 	{
-	// 		i++;
-	// 	}
-	// }
-
-	// array[count_array+1] = 0;
-	 return (array);
 }
 
+void ft_map(char *str, char *charset, char **array)
+{
+	int i;
+	int j;
+	int array_count;
+
+	i = 0;
+	array_count = 0;
+	j = 0;
+
+
+	while (str[i] != '\0')
+	{
+		if ((ft_check(str[i],charset)) == 1)
+		{
+			array[array_count][j] = '\0';
+			array_count++;
+			j = 0;
+			i++;
+		} 
+		array[array_count][j] = str[i];
+		i++;
+		j++;
+	}
+	array[array_count][i + 1] = '\0';
+	array[array_count + 1][0] = '0';
+	array[array_count + 1][1] = '\0';
+
+}
+char	**ft_split(char *str, char *charset)
+{
+	char **array;
+	int total_length;
+
+	total_length = ft_wc(str, charset) + 3;
+	printf("Total length is : %d\n", total_length);
+	array = malloc(sizeof(char) * total_length);
+	ft_alloc(str, charset, array);
+	ft_map(str, charset, array);
+
+	return (array);
+
+
+}
 
 
 
