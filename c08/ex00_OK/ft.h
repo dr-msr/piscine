@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim@42KL | drmsr <me@drmsr.dev>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 13:27:51 by mrahim@42KL |     #+#    #+#             */
-/*   Updated: 2023/10/03 13:28:20 by mrahim@42KL |    ###   ########.KL       */
+/*   Created: 2023/10/02 10:10:11 by mrahim@42KL |     #+#    #+#             */
+/*   Updated: 2023/10/02 10:17:26 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_H
+# define FT_H
 
-void	ft_putstr(char *str)
-{
-	int		i;
+void	ft_putchar(char c);
+void	ft_swap(int *a, int *b);
+void	ft_putstr(char *str);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
 
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
+#endif

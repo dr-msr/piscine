@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   main_ex03.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim@42KL | drmsr <me@drmsr.dev>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 13:27:51 by mrahim@42KL |     #+#    #+#             */
-/*   Updated: 2023/10/03 13:28:20 by mrahim@42KL |    ###   ########.KL       */
+/*   Created: 2023/10/02 11:43:35 by mrahim@42KL |     #+#    #+#             */
+/*   Updated: 2023/10/02 12:07:52 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "git_c08/ex03/ft_point.h"
 
-void	ft_putstr(char *str)
+void	set_point(t_point *point)
 {
-	int		i;
+	point->x = 42;
+	point->y = 21;
+}
 
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+int	main(void)
+{
+	t_point		point;
+	set_point(&point);
+	return (0);
 }

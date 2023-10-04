@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahim@42KL | drmsr <me@drmsr.dev>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 13:27:51 by mrahim@42KL |     #+#    #+#             */
-/*   Updated: 2023/10/03 13:28:20 by mrahim@42KL |    ###   ########.KL       */
+/*   Created: 2023/10/03 13:29:38 by mrahim@42KL |     #+#    #+#             */
+/*   Updated: 2023/10/03 13:29:48 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
+	while (s1[i] && s1[i] == s2[i])
 		i++;
-	}
+	return (s1[i] - s2[i]);
 }
