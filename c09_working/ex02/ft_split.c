@@ -12,78 +12,84 @@
 
 #include <stdlib.h>
 
-int		has_char(char c, char *str)
+int		ft_check(char c, char *str)
 {
-	while (*str)
+	int i;
+	
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (*str++ == c)
+		if (str[i] == c)
 			return (1);
+		i++;
 	}
 	return (0);
 }
 
-int		strs_l(char *str, char *charset)
+int		array_count(char *str, char *charset)
 {
 	int	part;
 	int count;
+	int i;
 
 	part = 1;
 	count = 0;
-	while (*str)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (!has_char(*str, charset) && part)
+		if ((ft_check(str[i], charset) == 0) && (part == 1))
 		{
 			count++;
 			part = 0;
 		}
-		else if (has_char(*str, charset))
+		else if ((ft_check(str[i], charset)) == 1)
 			part = 1;
-		str++;
+		i++;
 	}
 	return (count);
 }
 
-char	*ft_strdup(char *src, char *charset)
+char	*ft_map_array(char *src, char *charset)
 {
-	char	*dest;
+	char	*array;
 	char	*buffer;
 	int		length;
 
 	length = 0;
 	buffer = src;
-	while (*buffer && !has_char(*buffer++, charset))
+	while (*buffer && !ft_check(*buffer++, charset))
 		length++;
-	dest = (char*)malloc(sizeof(*src) * length);
-	buffer = dest;
+	array = (char*)malloc(sizeof(*src) * length);
+	buffer = array;
 	while (*src && length-- > 0)
 		*buffer++ = *src++;
 	*buffer = '\0';
-	return (dest);
+	return (array);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char	**strs;
+	char	**array;
 	char	**tmp;
 	int		part;
 
-	strs = (char**)malloc(strs_l(str, charset) * sizeof(*strs) + 1);
-	tmp = strs;
+	array = (char**)malloc(array_count(str, charset) * sizeof(*array) + 1);
+	tmp = array;
 	part = 1;
 	while (*str)
 	{
-		if (!has_char(*str, charset) && part)
+		if (!ft_check(*str, charset) && part)
 		{
 			part = 0;
-			*tmp = ft_strdup(str, charset);
+			*tmp = ft_map_array(str, charset);
 			tmp++;
 		}
-		else if (has_char(*str, charset))
+		else if (ft_check(*str, charset))
 			part = 1;
 		str++;
 	}
 	*tmp = 0;
-	return (strs);
+	return (array);
 }
 
 #include <stdio.h>
