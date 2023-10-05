@@ -6,16 +6,16 @@
 /*   By: mrahim@42KL | drmsr <me@drmsr.dev>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:46:18 by mrahim@42KL |     #+#    #+#             */
-/*   Updated: 2023/10/05 15:59:56 by mrahim@42KL |    ###   ########.KL       */
+/*   Updated: 2023/10/04 13:46:19 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	ft_check(char c, char *str)
+int		ft_check(char c, char *str)
 {
-	int	i;
-
+	int i;
+	
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -26,11 +26,11 @@ int	ft_check(char c, char *str)
 	return (0);
 }
 
-int	array_count(char *str, char *charset)
+int		array_count(char *str, char *charset)
 {
 	int	part;
-	int	count;
-	int	i;
+	int count;
+	int i;
 
 	part = 1;
 	count = 0;
@@ -59,7 +59,7 @@ char	*ft_map_array(char *src, char *charset)
 	buffer = src;
 	while (*buffer && !ft_check(*buffer++, charset))
 		length++;
-	array = (char *) malloc(sizeof(*src) * length);
+	array = (char*)malloc(sizeof(*src) * length);
 	buffer = array;
 	while (*src && length-- > 0)
 		*buffer++ = *src++;
@@ -73,7 +73,7 @@ char	**ft_split(char *str, char *charset)
 	char	**tmp;
 	int		part;
 
-	array = (char **) malloc(array_count(str, charset) * sizeof(*array) + 1);
+	array = (char**)malloc(array_count(str, charset) * sizeof(*array) + 1);
 	tmp = array;
 	part = 1;
 	while (*str)
@@ -91,7 +91,7 @@ char	**ft_split(char *str, char *charset)
 	*tmp = 0;
 	return (array);
 }
-/*
+
 #include <stdio.h>
 
 int	main(int argc, char *argv[])
@@ -121,4 +121,4 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	return (0);
-}*/
+}
