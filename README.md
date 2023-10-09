@@ -26,7 +26,7 @@
 
 ###
 
-<p align="left">Shell 0️⃣0️⃣ : 95% : EX00 - EX09 OK<br>Shell 0️⃣1️⃣ : 40% : EX00 - EX04 OK<br>C 0️⃣0️⃣ : 50% : EX00 - EX04 OK<br>C 0️⃣1️⃣ : 85% : EX00 - EX06 OK<br>C 0️⃣2️⃣ : 85% : EX00 - EX10 OK<br>C 0️⃣3️⃣ : 75% : EX00 - EX04 OK<br>C 0️⃣4️⃣ : 77% : EX00 - EX03 OK<br>C 0️⃣5️⃣ : 70% : EX00 - EX06 OK<br>C 0️⃣6️⃣ : 100% : EX00 - EX03 OK<br>C 0️⃣7️⃣ : 60% : EX00 - EX03 OK<br>C 0️⃣8️⃣ : 100% EX00 - EX05 OK<br>C 0️⃣9️⃣ : 100% : EX00 - EX02 OK<br>Rush 0️⃣0️⃣ : 120% <br>Rush 0️⃣1️⃣ : 100%<br>Rush 0️⃣2️⃣ :  0%</p>
+<p align="left">Shell 0️0 : 95% : EX00 - EX09 OK<br>Shell 01 : 40% : EX00 - EX04 OK<br>C 00 : 50% : EX00 - EX04 OK<br>C 01 : 85% : EX00 - EX06 OK<br>C 02 : 85% : EX00 - EX10 OK<br>C 03 : 75% : EX00 - EX04 OK<br>C 04 : 77% : EX00 - EX03 OK<br>C 05 : 70% : EX00 - EX06 OK<br>C 06 : 100% : EX00 - EX03 OK<br>C 0️7️ : 60% : EX00 - EX03 OK<br>C 0️8️ : 100% EX00 - EX05 OK<br>C 0️9️ : 100% : EX00 - EX02 OK<br>Rush 0️0️ : 120% <br>Rush 0️1️ : 100%<br>Rush 0️2️ :  0%</p>
 
 ###
 
