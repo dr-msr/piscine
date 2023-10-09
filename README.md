@@ -18,7 +18,7 @@
 
 ###
 
-<img src="https://raw.githubusercontent.com/dr-msr/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/dr-msr/piscine/output/snake.svg" alt="Snake animation" />
 
 ###
 
