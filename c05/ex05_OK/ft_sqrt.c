@@ -6,7 +6,7 @@
 /*   By: mrahim <mrahim@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:55:55 by mrahim            #+#    #+#             */
-/*   Updated: 2023/09/27 13:19:07 by mrahim@42KL |    ###   ########.KL       */
+/*   Updated: 2023/10/14 21:43:34 by mrahim@42KL |    ###   ########.KL       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_sqrt(int nb)
 	{
 		if (count * count == nb)
 			return (count);
-	count++;
+		count++;
 	}
 	return (0);
 }
